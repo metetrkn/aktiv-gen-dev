@@ -66,11 +66,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# Add this print statement to debug in the Railway logs
+print(f"DATABASE_URL env var exists: {'DATABASE_URL' in os.environ}")
 
 DATABASES = {
     'default': dj_database_url.config(
+        env='DATABASE_URL',  # Explicitly tell it to look for this variable
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600
     )
